@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recipe.service.mapper.RecipeMapper">
+	<insert id="create" parameterType="com.recipe.model.RecipeDTO">
+		insert into recipe (category_id, small_category_id, title, content, image_url)
+		values (#{categoryId}, #{smallCategoryId}, #{title}, #{content}, #{imageUrl})
+	</insert>
+	<select id="search" parameterType="com.recipe.model.RecipeDTO" resultType="com.recipe.model.RecipeSearchResult">
+		select id,
+		       category_id as categoryId,
+		       (
+		       	select name_jp
+		       	  from category b
+		       	 where a.category_id = b.id 
+		       ) categoryName,
+		       small_category_id as smallCategoryId,
+		       (
+		       	select name_jp
+		       	  from small_category c
+		       	 where a.small_category_id = c.id
+		       ) smallCategoryName,
+		       title,
+		       content,
+		       image_url as imageUrl
+		  from recipe a
+		 where 1 = 1
+		 <if test="categoryId != null">
+		   and a.category_id = #{categoryId}
+		 </if>
+		 <if test="smallCategoryId != null">
+		   and a.small_category_id = #{smallCategoryId}
+		 </if>
+		 <if test="title != null">
+		   and match(a.title) against(#{title})
+		 </if>
+		 <if test="content != null">
+		   and match(a.content) against(#{content})
+		 </if>
+	</select>
+</mapper>    
