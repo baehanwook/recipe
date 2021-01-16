@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>レシピ作成</title>
+        <meta name="description" content="レシピ作成">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+        <script src="/js/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="/js/detail.js"></script>
+    </head>
+    <body>
+    	<div th:replace="/menu/menu_top"></div>
+        <div class="news-contents wrapper">
+			<div th:replace="/menu/menu_left"></div>
+            <article>
+                <header class="post-info">
+                    <h2 class="post-title"><span th:text="${recipe.title}"></span></h2>
+                    <p class="post-date">3/30 <span>2020</span></p>
+                    <p class="post-cat">カテゴリー：その他</p>
+                </header>
+                <img class="detail_img" th:src="${recipe.imageUrl}" alt="img">
+                <br>
+                    <span th:text="${recipe.content}"></span>
+                <br>
+                <p>
+                	<a id="mod_btn" class="btn-gradient orange" th:href="@{/recipe/update(id=${recipe.id})}">修正</a>
+                	<a id="delete_btn" class="btn-gradient orange margin10" th:href="@{/recipe/delete(id=${recipe.id})}">削除</a>
+                </p>
+            </article>
+        </div>
+        <div th:replace="/menu/menu_footer"></div>
+    </body>
+</html>

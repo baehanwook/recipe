@@ -7,6 +7,7 @@
 		insert into recipe (category_id, small_category_id, title, content, image_url)
 		values (#{categoryId}, #{smallCategoryId}, #{title}, #{content}, #{imageUrl})
 	</insert>
+	
 	<select id="search" parameterType="com.recipe.model.RecipeDTO" resultType="com.recipe.model.RecipeSearchResult">
 		select id,
 		       category_id as categoryId,
@@ -39,4 +40,58 @@
 		   and match(a.content) against(#{content})
 		 </if>
 	</select>
+	
+	<select id="getCategory" resultType="com.recipe.model.CategoryDto">
+		select id,
+			   name,
+			   name_jp nameJp
+		  from category
+	</select>
+	
+	<select id="getSmallCategory" resultType="com.recipe.model.SmallCategoryDto">
+		select id,
+			   category_id as categoryId,
+			   name,
+			   name_jp nameJp
+		  from small_category
+	</select>
+
+	<select id="getDetail" resultType="com.recipe.model.RecipeSearchResult">
+		select id,
+		       category_id as categoryId,
+		       (
+		       	select name_jp
+		       	  from category b
+		       	 where a.category_id = b.id 
+		       ) categoryName,
+		       small_category_id as smallCategoryId,
+		       (
+		       	select name_jp
+		       	  from small_category c
+		       	 where a.small_category_id = c.id
+		       ) smallCategoryName,
+		       title,
+		       content,
+		       image_url as imageUrl
+		  from recipe a
+		 where 1 = 1
+		   and id = #{id}
+	</select>
+	
+	<update id="updateRecipe" parameterType="com.recipe.model.RecipeDTO">
+		update recipe
+		   set category_id = #{categoryId},
+		   	   small_category_id = #{smallCategoryId},
+		   	   title = #{title},
+			 <if test="imageUrl != null">
+			   image_url = #{imageUrl},	
+			 </if>
+		   	   content = #{content}
+	     where id = #{id}		   	   
+	</update>
+	
+	<delete id="deleteRecipe">
+		delete from recipe
+		 where id = #{id} 
+	</delete>
 </mapper>    

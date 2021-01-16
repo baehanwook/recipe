@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>レシピ作成</title>
+        <meta name="description" content="レシピ作成">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+        <script src="/js/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="/js/write.js"></script>
+    </head>
+    <body>
+    	<div th:replace="/menu/menu_top"></div>
+        <div class="news-contents wrapper">
+			<div th:replace="/menu/menu_left"></div>
+            <article>
+                <form action="/recipe/update" method="post" enctype="multipart/form-data">
+                    <table class="form-table">
+                        <tbody>
+                            <tr>
+                            <th>カテゴリー</th>
+                            <td>
+                                <select class="width100" name="categoryId" id="categoryId">
+                                   <option 
+                                   		th:each="category : ${categoryList}" 
+                                   		th:value="${category.id}" 
+                                   		th:text="${category.nameJp}"
+                                   		th:selected="${category.id} == ${recipe.categoryId}">
+                                   </option>
+                                </select>
+                            </td>
+                            </tr>
+                            <tr>
+                                <th>小カテゴリー</th>
+                                <td>
+                                    <select class="width100" name="smallCategoryId" id="smallCategoryId">
+                                        <option 
+                                        	th:each="smallCategory : ${smallCategoryList}" 
+                                        	th:value="${smallCategory.id}" 
+                                        	th:text="${smallCategory.nameJp}"
+                                        	th:selected="${smallCategory.id} == ${recipe.smallCategoryId}">
+                                    </select>
+                                </td>
+                                </tr>
+                            <tr>
+                            <th>タイトル</th>
+                            <td><input type="text" name="title" id="title" size="60" th:value="${recipe.title}">
+                            </td>
+                            </tr>
+                            <tr>
+                            <th>写真</th>
+                            <td><input type="file" name="file">
+                            </td>
+                            </tr>
+                            <tr>
+                            <th>レシピ内容</th>
+                            <td><textarea name="content" id="content" cols="30" rows="10" th:text="${recipe.content}"></textarea>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                    <br>
+                    <button id="update_btn" type="submit" class="btn-gradient orange">修正</button>
+                    </p>
+                    <input type="hidden" name=orgFileUrl th:value="${recipe.imageUrl}">
+                    <input type="hidden" name=id th:value="${recipe.id}">
+                </form>
+
+            </article>
+        </div>
+        <div th:replace="/menu/menu_footer"></div>
+    </body>
+</html>

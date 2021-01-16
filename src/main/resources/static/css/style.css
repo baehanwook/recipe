@@ -1,0 +1,342 @@
+@charset "UTF-8";
+
+html {
+    font-size: 100%;
+}
+body {
+    font-family: "Yu Gothic Medium", "YuGothic", sans-serif;
+    line-height: 1.7;
+    color: #432;
+}
+a {
+    text-decoration: none;
+}
+img {
+    max-width: 100%;
+}
+.main-nav {
+    display: flex;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    margin-top: 34px;
+    list-style: none;
+}
+.main-nav li {
+    margin-left: 36px;
+}
+.main-nav a {
+    color: #432;
+}
+.main-nav a:hover{
+    color: #0bd;
+}
+.page-header {
+    display: flex;
+    justify-content: space-between;
+}
+.wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 4%;
+}
+.home-content {
+    text-align: center;
+    margin-top: 10%;
+}
+.home-content p {
+    font-size: 1.125rem;
+    margin: 10px 0 42px;
+}
+.page-title {
+    font-size: 5rem;
+    font-family: 'Philosopher', serif;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+/* ボタン */
+.button {
+    font-size: 1.375rem;
+    background: #0bd;
+    color: #fff;
+    border-radius: 5px;
+    padding: 18px 32px;
+}
+.button:hover {
+    background: #0090aa;
+}
+.big-bg {
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+#home {
+    background-image: url(../img/kzun.jpg);
+    min-height: 100vh;
+}
+#home .page-title {
+    text-transform: none;
+}
+/* フッター */
+footer {
+    background: #432;
+    text-align: center;
+    padding: 26px 0;
+}
+footer p {
+    color: #fff;
+    font-size: 0.875rem;
+}
+/* 記事部分 */
+article {
+    width: 82%;
+}
+/* サイトバー */
+aside {
+    width: 14%;
+}
+/* NEWS */
+#news {
+    background-image: url(../img/kzun.jpg);
+    height: 100px;
+    margin-bottom: 40px;
+}
+#news .page-title {
+    text-align: center;
+}
+.news-contents {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+.post-info {
+    position: relative;
+    padding-top: 4px;
+    margin-bottom: 40px;
+}
+.post-date {
+    background: #0bd;
+    border-radius: 50%;
+    color: #fff;
+    width: 100px;
+    height: 100px;
+    font-size: 1.625rem;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    padding-top: 10px;
+}
+.post-date span {
+    font-size: 1rem;
+    border-top: 1px rgba(255,255,255,.5) solid;
+    padding-top: 6px;
+    display: block;
+    width: 60%;
+    margin: 0 auto;
+}
+.post-title {
+    font-family: "Yu Mincho", "YuMincho", serif;
+    font-size: 2rem;
+    font-weight: normal;
+}
+.post-title,
+.post-cat {
+    margin-left: 120px;
+}
+article img {
+    margin-bottom: 0px;
+}
+article p {
+    margin-bottom: 1rem;
+}
+.sub-title {
+    font-size: 1.375rem;
+    padding: 0 8px 8px;
+    border-bottom: 2px #0bd solid;
+    font-weight: normal;
+}
+.sub-menu {
+    margin-bottom: 60px;
+    list-style: none;
+}
+.sub-menu li {
+    border-bottom: 1px #ddd solid;
+}
+.sub-menu a {
+    color: #432;
+    padding: 10px;
+    display: block;
+}
+.sub-menu a:hover {
+    color: #0bd;
+}
+.grid {
+    display: grid;
+    gap: 26px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-top: 6%;
+    margin-bottom: 40px;
+}
+.item {
+	
+	width: 120px;
+	height: 160px;
+}
+.item_img {
+	width: 120px;
+	height: 120px;
+}
+.detail_img {
+	width: 600px;
+	height: 600px;
+}
+.item_title {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 50px;
+}
+table {
+    border-collapse: collapse;
+  }
+   
+  p {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0px auto 30px;
+  }
+   
+  input[type="submit"],
+  input[type="text"],
+  select,
+  textarea,
+  button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+    border: none;
+  }
+   
+   
+  input[type="text"],
+  textarea {
+    background: #f8f8f8;
+    font-size: 16px;
+    padding: 12px 15px;
+    /*width: 480px;*/
+    transition: 0.8s;
+    border-radius: 0;
+  }
+
+  select {
+    background: #f8f8f8;
+    font-size: 16px;
+    padding: 12px 15px;
+    transition: 0.8s;
+    border-radius: 0;
+  }
+
+
+
+  input[type="text"]:focus,
+  textarea:focus {
+    background: #e9f5fb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+   
+  textarea[name="content"] {
+    display: inline-block;
+    width: 100%;
+    height: 200px;
+  }
+   
+  input::placeholder,
+  textarea::placeholder {
+    color: #ccc;
+  }
+   
+  ::-webkit-input-placeholder {
+    color: #ccc;
+    opacity: 1;
+  }
+   
+  ::-moz-placeholder {
+    color: #ccc;
+    opacity: 1;
+  }
+   
+  :-ms-input-placeholder {
+    color: #ccc;
+    opacity: 1;
+  }
+   
+  .form-table {
+    width: 100%;
+  }
+   
+  .form-table th,
+  .form-table td {
+    border-top: 1px solid #d7d7d7;
+    border-bottom: 1px solid #d7d7d7;
+    padding: 20px;
+  }
+   
+  .form-table th {
+    background: #ffecea;
+    padding-left: 50px;
+    position: relative;
+    text-align: left;
+    width: 300px;
+  }
+
+.btn-gradient {
+	text-decoration: none;
+	color: white;
+    padding: 10px 30px;
+	display: inline-block;
+	position: relative;
+	border: 1px solid rgba(0,0,0,0.21);
+	border-bottom: 4px solid rgba(0,0,0,0.21);
+	border-radius: 4px;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+.btn-gradient.orange {
+	background: rgba(255,105,30,1);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255,105,30,1)), to(rgba(230,95,28,1)));
+	background: -webkit-linear-gradient(rgba(255,105,30,1) 0%, rgba(230,95,28,1) 100%);
+	background: -moz-linear-gradient(rgba(255,105,30,1) 0%, rgba(230,95,28,1) 100%);
+	background: -o-linear-gradient(rgba(255,105,30,1) 0%, rgba(230,95,28,1) 100%);
+	background: linear-gradient(rgba(255,105,30,1) 0%, rgba(230,95,28,1) 100%);
+}
+.btn-gradient.blue {
+    background: rgb(122, 85, 209);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(122, 85, 209)), to(rgba(122, 85, 209)));
+    background: -webkit-linear-gradient(rgba(122, 85, 209) 0%, rgba(122, 85, 209) 100%);
+    background: -moz-linear-gradient(rgba(122, 85, 209) 0%, rgba(122, 85, 209) 100%);
+    background: -o-linear-gradient(rgba(122, 85, 209) 0%, rgba(122, 85, 209) 100%);
+    background: linear-gradient(rgba(122, 85, 209) 0%, rgba(122, 85, 209) 100%);
+}
+.btn-gradient.orange:active {background: #E8601B;}
+.btn.mini, 
+.btn-two.mini, 
+.btn-gradient.mini, 
+.btn-effect.mini {
+  padding: 4px 14px;  
+  font-size: 12px;
+  margin: 10px;
+}
+/* etc */
+.width20 {
+    width: 20%;
+}
+.width100 {
+    width: 100%;
+}
+.right {
+    float: right;
+}
+.margin10 {
+	margin: 10px; 
+}

@@ -10,4 +10,6 @@ public class RecipeDTO {
   String title;
   String content;
   String imageUrl;
+  String orgFileUrl;
+  // MultipartFile file;
 }
