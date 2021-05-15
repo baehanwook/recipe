@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 **/mysql/**
 **/uploads/**
+**/fileUpload/**
 
 ### STS ###
 .apt_generated

@@ -3,7 +3,6 @@ package com.recipe.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.recipe.model.CategoryDto;
 import com.recipe.model.RecipeDTO;
 import com.recipe.model.RecipeSearchResult;
 import com.recipe.model.SmallCategoryDto;
@@ -13,40 +12,35 @@ import com.recipe.service.mapper.RecipeMapper;
 public class RecipeServiceImpl implements RecipeService {
 
   @Autowired
-  private RecipeMapper mapper;
+  private RecipeMapper recipeMapper;
 
   @Override
   public void create(RecipeDTO recipeDto) throws Exception {
-    mapper.create(recipeDto);
+    recipeMapper.create(recipeDto);
   }
 
   @Override
   public void update(RecipeDTO recipeDto) throws Exception {
-    mapper.updateRecipe(recipeDto);
+    recipeMapper.updateRecipe(recipeDto);
   }
 
   @Override
-  public List<RecipeSearchResult> search(RecipeDTO recipeDto) throws Exception {
-    return mapper.search(recipeDto);
+  public List<SmallCategoryDto> getSmallCategoryList() throws Exception {
+    return recipeMapper.getSmallCategoryList();
   }
 
   @Override
-  public List<CategoryDto> getCategory() throws Exception {
-    return mapper.getCategory();
-  }
-
-  @Override
-  public List<SmallCategoryDto> getSmallCategory() throws Exception {
-    return mapper.getSmallCategory();
+  public List<RecipeSearchResult> searchRecipe(RecipeDTO recipeDto) throws Exception {
+    return recipeMapper.search(recipeDto);
   }
 
   @Override
   public RecipeSearchResult getDetail(String id) throws Exception {
-    return mapper.getDetail(id);
+    return recipeMapper.getDetail(id);
   }
 
   @Override
   public void delete(String id) throws Exception {
-    mapper.deleteRecipe(id);
+    recipeMapper.deleteRecipe(id);
   }
 }

@@ -13,3 +13,14 @@ services:
    - MYSQL_DATABASE=recipe
   ports:
    - 13306:3306
+
+ recipe:
+  build: .
+  volumes:
+   - ./fileUpload:/fileUpload
+  ports:
+   -  5000:8080
+  depends_on :
+   - mysql
+  environment:
+   - "SPRING_PROFILES_ACTIVE=stg"

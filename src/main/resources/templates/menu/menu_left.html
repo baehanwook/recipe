@@ -1,9 +1,10 @@
             <aside>
-                <h3 class="sub-title">カテゴリー</h3>
+                <h3 class="sub-title"><a href="/recipe/category">カテゴリー</a></h3>
                 <ul class="sub-menu">
-                    <li><a href="#">韓国</a></li>
-                    <li><a href="#">日本</a></li>
-                    <li><a href="#">中華</a></li>
-                    <li><a href="#">その他</a></li>
+                    <li th:each="category : ${categoryList}">
+                    	<a th:href="@{/recipe/menu(categoryId=${category.id})}">
+                    		<span th:text="${category.nameJp}"></span>
+                    	</a>
+                    </li>
                 </ul>
             </aside>

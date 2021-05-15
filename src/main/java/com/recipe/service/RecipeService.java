@@ -1,7 +1,6 @@
 package com.recipe.service;
 
 import java.util.List;
-import com.recipe.model.CategoryDto;
 import com.recipe.model.RecipeDTO;
 import com.recipe.model.RecipeSearchResult;
 import com.recipe.model.SmallCategoryDto;
@@ -17,15 +16,6 @@ public interface RecipeService {
   public void create(RecipeDTO recipeDto) throws Exception;
 
   /**
-   * レシピ検索
-   * 
-   * @param recipeDto
-   * @return
-   * @throws Exception
-   */
-  public List<RecipeSearchResult> search(RecipeDTO recipeDto) throws Exception;
-
-  /**
    * レシピ修正
    * 
    * @param recipeDto
@@ -34,20 +24,21 @@ public interface RecipeService {
   public void update(RecipeDTO recipeDto) throws Exception;
 
   /**
-   * カテゴリー取得
-   * 
-   * @return
-   * @throws Exception
-   */
-  public List<CategoryDto> getCategory() throws Exception;
-
-  /**
    * 小カテゴリー取得
    * 
    * @return
    * @throws Exception
    */
-  public List<SmallCategoryDto> getSmallCategory() throws Exception;
+  public List<SmallCategoryDto> getSmallCategoryList() throws Exception;
+
+  /**
+   * レシピ検索
+   * 
+   * @param recipeDto
+   * @return
+   * @throws Exception
+   */
+  public List<RecipeSearchResult> searchRecipe(RecipeDTO recipeDto) throws Exception;
 
   /**
    * レシピ詳細の取得
@@ -65,4 +56,5 @@ public interface RecipeService {
    * @throws Exception
    */
   public void delete(String id) throws Exception;
+
 }

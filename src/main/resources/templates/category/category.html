@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>WCB Cafe - menu</title>
+        <meta name="description" content="ブレンドコーヒーとヘルシーなオーガニックフードを提供するカフェ">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+        <script src="/js/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="/js/category.js"></script>
+    </head>
+    <body>
+     	<div th:replace="menu/menu_top"></div>
+        <div class="news-contents wrapper">
+			<div th:replace="menu/menu_left"></div>
+            <article>
+
+				<div id="board_area"> 
+				  <h2>カテゴリー</h2>
+				    <table class="list-table">
+				      <thead>
+				          <tr>
+				              <th width="120">英語名</th>
+				                <th width="120">日本語名</th>
+				                <th width="400">説明</th>
+				                <th width="80"></th>
+				                <th width="80"></th>
+				            </tr>
+				        </thead> 
+				      <tbody>
+				        <tr th:each="category : ${categoryList}" >
+				          <td width="120" ><a th:href="@{/recipe/category/detail(id=${category.id})}" th:text="${category.name}"></a> </td>
+				          <td width="120" th:text="${category.nameJp}"></td>
+				          <td width="400" th:text="${category.comment}"></td>
+				          <td width="80"><a th:href="@{/recipe/category/detail(id=${category.id})}" class="btn-gradient orange mini">修正</a></td>
+				          <td width="80"><a href="/recipe/create" onclick="return delCheck()" class="btn-gradient blue mini" >削除</a></td>
+				        </tr>
+				      </tbody>
+				    </table>
+				  </div>
+	                <span class="right">
+	                <a href="/recipe/category/create" class="btn-gradient orange mini">作成</a>
+	                </span>				  
+            </article>
+        </div>
+		<div th:replace="menu/menu_footer"></div>
+    </body>
+</html>

@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
-import com.recipe.common.Constants;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -15,12 +14,17 @@ public class FileServiceImpl implements FileService {
 
   @Override
   public String uploadFile(String originalName, byte[] fileData) throws Exception {
+    File makeFolder = new File(uploadPath);
+    if (!makeFolder.exists()) {
+      makeFolder.mkdirs();
+    }
+
     UUID uid = UUID.randomUUID();
     String savedName = uid.toString() + "_" + originalName;
     File target = new File(uploadPath, savedName);
     FileCopyUtils.copy(fileData, target);
 
-    return "/upload" + Constants.SLASH + savedName;
+    return uploadPath + savedName;
   }
 
   @Override
