@@ -16,9 +16,7 @@ public interface RecipeMapper {
 
   public List<RecipeDTO> read(RecipeDTO recipeDto) throws Exception;
 
-  public List<CategoryDto> getCategory() throws Exception;
-
-  public List<SmallCategoryDto> getSmallCategory() throws Exception;
+  public List<SmallCategoryDto> getSmallCategoryList() throws Exception;
 
   public RecipeSearchResult getDetail(String id) throws Exception;
 

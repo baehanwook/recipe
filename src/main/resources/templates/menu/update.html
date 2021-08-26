@@ -13,9 +13,9 @@
         <script type="text/javascript" src="/js/write.js"></script>
     </head>
     <body>
-    	<div th:replace="/menu/menu_top"></div>
+    	<div th:replace="menu/menu_top"></div>
         <div class="news-contents wrapper">
-			<div th:replace="/menu/menu_left"></div>
+			<div th:replace="menu/menu_left"></div>
             <article>
                 <form action="/recipe/update" method="post" enctype="multipart/form-data">
                     <table class="form-table">
@@ -72,6 +72,6 @@
 
             </article>
         </div>
-        <div th:replace="/menu/menu_footer"></div>
+        <div th:replace="menu/menu_footer"></div>
     </body>
 </html>

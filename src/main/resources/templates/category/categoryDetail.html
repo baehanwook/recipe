@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>レシピ作成</title>
+        <meta name="description" content="レシピ作成">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+        <script src="/js/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="/js/categoryUpdate.js"></script>
+        <script type="text/javascript" src="/js/common.js"></script>
+    </head>
+    <body>
+    	<div th:replace="menu/menu_top"></div>
+        <div class="news-contents wrapper">
+			<div th:replace="menu/menu_left"></div>
+            <article>
+                <form action="/recipe/category/update" method="post">
+                    <table class="form-table">
+                        <tbody>
+                            <tr>
+                            <th>英語名</th>
+                            <td><input type="text" name="name" id="name" size="60" th:value="${category.name}">
+                            </td>
+                            </tr>
+                            <tr>
+                            <th>日本語名</th>
+                            <td><input type="text" name="nameJp" id="nameJp" size="60" th:value="${category.nameJp}">
+                            </td>
+                            </tr>                            
+                            <tr>
+                            <th>説明</th>
+                            <td><textarea name="comment" id="comment" cols="70" rows="10" maxlength="300" th:text="${category.comment}"></textarea>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                    <br>
+                    <button id="update_btn" type="submit" class="btn-gradient orange">修正</button>
+                    </p>
+                    <input type="hidden" name=id th:value="${category.id}">
+                </form>
+
+            </article>
+        </div>
+        <div th:replace="menu/menu_footer"></div>
+    </body>
+</html>

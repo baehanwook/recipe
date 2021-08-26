@@ -13,14 +13,14 @@
         <script type="text/javascript" src="/js/detail.js"></script>
     </head>
     <body>
-    	<div th:replace="/menu/menu_top"></div>
+    	<div th:replace="menu/menu_top"></div>
         <div class="news-contents wrapper">
-			<div th:replace="/menu/menu_left"></div>
+			<div th:replace="menu/menu_left"></div>
             <article>
                 <header class="post-info">
                     <h2 class="post-title"><span th:text="${recipe.title}"></span></h2>
-                    <p class="post-date">3/30 <span>2020</span></p>
-                    <p class="post-cat">カテゴリー：その他</p>
+                    <p class="post-date"><span th:text="${recipe.updateMonth} + '/' + ${recipe.updateDay}"></span> <span class="year" th:text="${recipe.updateYear}"></span></p>
+                    <p class="post-cat">カテゴリー：<span th:text="${recipe.smallCategoryName}"></span></p>
                 </header>
                 <img class="detail_img" th:src="${recipe.imageUrl}" alt="img">
                 <br>
@@ -32,6 +32,6 @@
                 </p>
             </article>
         </div>
-        <div th:replace="/menu/menu_footer"></div>
+        <div th:replace="menu/menu_footer"></div>
     </body>
 </html>

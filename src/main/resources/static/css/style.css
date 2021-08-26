@@ -125,7 +125,7 @@ aside {
     top: 0;
     padding-top: 10px;
 }
-.post-date span {
+.post-date .year {
     font-size: 1rem;
     border-top: 1px rgba(255,255,255,.5) solid;
     padding-top: 6px;
@@ -339,4 +339,40 @@ table {
 }
 .margin10 {
 	margin: 10px; 
+}
+.menu-font {
+	font-size: 13px !important;
+}
+.padding9 {
+	padding: 7px 15px !important;
+	margin: 2px;
+}
+.padding10 {
+	padding: 10px !important;
+}
+.line-height5 {
+	line-height: 5px;
+}
+.font-size1 {
+	font-size: 1px !important;
+	line-height: 0.5 !important;	
+}
+.list-table {
+	margin-top: 40px;
+}
+.list-table thead th{
+	height:40px;
+	border-top:2px solid #09C;
+	border-bottom:1px solid #CCC;
+	font-weight: bold;
+	font-size: 17px;
+}
+.list-table tbody td{
+	text-align:center;
+	padding:10px 0;
+	border-bottom:1px solid #CCC; height:20px;
+	font-size: 14px 
+}
+.pointer {
+	cursor: pointer;
 }

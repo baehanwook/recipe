@@ -12,4 +12,7 @@ public class RecipeSearchResult {
   String title;
   String content;
   String imageUrl;
+  String updateYear;
+  String updateMonth;
+  String updateDay;
 }

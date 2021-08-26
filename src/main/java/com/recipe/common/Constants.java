@@ -14,6 +14,8 @@ public final class Constants {
 
   public static final String DELETE = "/delete";
 
+  public static final String CATEGORY = "/category";
+
   public static final String MENU = "/menu";
 
   public static final String SLASH = "/";

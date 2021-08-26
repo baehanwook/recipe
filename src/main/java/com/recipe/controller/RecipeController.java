@@ -1,6 +1,5 @@
 package com.recipe.controller;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -8,16 +7,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.recipe.common.Constants;
 import com.recipe.model.RecipeDTO;
-import com.recipe.model.RecipeSearchResult;
+import com.recipe.service.CategoryService;
 import com.recipe.service.FileService;
 import com.recipe.service.RecipeService;
-import com.recipe.service.mapper.RecipeMapper;
 
 @Controller
 @RequestMapping(Constants.RECIPE)
@@ -27,7 +24,7 @@ public class RecipeController {
   private RecipeService recipeService;
 
   @Autowired
-  private RecipeMapper mapper;
+  private CategoryService categoryService;
 
   @Autowired
   private FileService fileService;
@@ -42,9 +39,13 @@ public class RecipeController {
    * @throws Exception
    */
   @GetMapping(Constants.MENU)
-  public String menu(RecipeDTO recipeDTO, Model model) throws Exception {
-    model.addAttribute("recipeList", recipeService.search(recipeDTO));
-    return "/menu/menu";
+  public String menu(@RequestParam(value = "categoryId", required = false) String categoryId, Model model) throws Exception {
+    RecipeDTO recipeDto = new RecipeDTO();
+    recipeDto.setCategoryId(categoryId);
+    model.addAttribute("smallCategoryList", recipeService.getSmallCategoryList());
+    model.addAttribute("categoryList", categoryService.getCategoryList());
+    model.addAttribute("recipeList", recipeService.searchRecipe(recipeDto));
+    return "menu/menu";
   }
 
   /**
@@ -56,9 +57,9 @@ public class RecipeController {
    */
   @GetMapping(Constants.CREATE)
   public String createRecipe(Model model) throws Exception {
-    model.addAttribute("categoryList", recipeService.getCategory());
-    model.addAttribute("smallCategoryList", recipeService.getSmallCategory());
-    return "/menu/write";
+    model.addAttribute("categoryList", categoryService.getCategoryList());
+    model.addAttribute("smallCategoryList", recipeService.getSmallCategoryList());
+    return "menu/write";
   }
 
   /**
@@ -72,7 +73,7 @@ public class RecipeController {
   @GetMapping(Constants.DETAIL)
   public String detailRecipe(@RequestParam("id") String id, Model model) throws Exception {
     model.addAttribute("recipe", recipeService.getDetail(id));
-    return "/menu/detail";
+    return "menu/detail";
   }
 
   /**
@@ -85,10 +86,10 @@ public class RecipeController {
    */
   @GetMapping(Constants.UPDATE)
   public String updateRecipe(@RequestParam("id") String id, Model model) throws Exception {
-    model.addAttribute("categoryList", recipeService.getCategory());
-    model.addAttribute("smallCategoryList", recipeService.getSmallCategory());
+    model.addAttribute("categoryList", categoryService.getCategoryList());
+    model.addAttribute("smallCategoryList", recipeService.getSmallCategoryList());
     model.addAttribute("recipe", recipeService.getDetail(id));
-    return "/menu/update";
+    return "menu/update";
   }
 
   /**
@@ -101,8 +102,7 @@ public class RecipeController {
    * @throws Exception
    */
   @PostMapping(Constants.CREATE)
-  public String createRecipe(@RequestParam("file") MultipartFile file,
-      @ModelAttribute RecipeDTO recipeDto, Model model) throws Exception {
+  public String createRecipe(@RequestParam("file") MultipartFile file, @ModelAttribute RecipeDTO recipeDto, Model model) throws Exception {
     String savedName = fileService.uploadFile(file.getOriginalFilename(), file.getBytes());
     recipeDto.setImageUrl(savedName);
     recipeService.create(recipeDto);
@@ -117,8 +117,10 @@ public class RecipeController {
    * @throws Exception
    */
   @PostMapping(Constants.SEARCH)
-  public List<RecipeSearchResult> searchRecipe(@RequestBody RecipeDTO recipeDto) throws Exception {
-    return mapper.search(recipeDto);
+  public String searchRecipe(@ModelAttribute RecipeDTO recipeDto, Model model) throws Exception {
+    model.addAttribute("smallCategoryList", recipeService.getSmallCategoryList());
+    model.addAttribute("recipeList", recipeService.searchRecipe(recipeDto));
+    return "menu/menu";
   }
 
   /**
@@ -131,8 +133,7 @@ public class RecipeController {
    * @throws Exception
    */
   @PostMapping(Constants.UPDATE)
-  public String updateRecipe(@RequestParam("file") MultipartFile file,
-      @ModelAttribute RecipeDTO recipeDto, Model model) throws Exception {
+  public String updateRecipe(@RequestParam("file") MultipartFile file, @ModelAttribute RecipeDTO recipeDto, Model model) throws Exception {
     if (!file.isEmpty() && !recipeDto.getOrgFileUrl().isEmpty()) {
       fileService.deleteFile(recipeDto.getOrgFileUrl());
     }
@@ -153,15 +154,8 @@ public class RecipeController {
    * @return
    */
   @GetMapping(Constants.DELETE)
-  public String deleteRecipe(String id) throws Exception {
+  public String deleteRecipe(@RequestParam("id") String id) throws Exception {
     recipeService.delete(id);
     return "redirect:/recipe/menu";
   }
-
-  @GetMapping("/test")
-  public String test() throws Exception {
-    System.out.println(uploasUrl);
-    return "/menu/menu";
-  }
-
 }

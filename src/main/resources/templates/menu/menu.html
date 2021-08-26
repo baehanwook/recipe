@@ -13,25 +13,11 @@
         <script type="text/javascript" src="/js/menu.js"></script>
     </head>
     <body>
-     	<div th:replace="/menu/menu_top"></div>
+     	<div th:replace="menu/menu_top"></div>
         <div class="news-contents wrapper">
-			<div th:replace="/menu/menu_left"></div>
+			<div th:replace="menu/menu_left"></div>
             <article>
-                &nbsp;&nbsp;&nbsp;&nbsp;小カテゴリー
-                <select class="width20" name="categori">
-                        <option value="">選択してください</option>
-                        <option value="korea">スープ</option>
-                        <option value="japan">肉</option>
-                        <option value="china">海鮮</option>
-                        <option value="etc">etc</option>
-                </select>
-                &nbsp;&nbsp;
-                キーワード
-                <input type="text" name="keyword" size="25" value="" placeholder="キーワード">
-                <a href="#" class="btn-gradient orange mini">検索</a>
-                <span class="right">
-                <a href="/recipe/create" class="btn-gradient blue mini">作成</a>
-                </span>
+
                 <div class="wrapper grid">
                 	<div class="item" th:each="recipe : ${recipeList}">
                 	<a th:href="@{/recipe/detail(id=${recipe.id})}">	
@@ -40,9 +26,25 @@
                 	</a>
                 	</div>
                 </div>
-
+            	<form action="/recipe/search/" method="post" class="menu-font">
+	                &nbsp;&nbsp;&nbsp;&nbsp;<span class="">小カテゴリー</span>
+	                <select class="width20 padding9 menu-font" name="smallCategoryId">
+	 					<option value="">選択してください</option>
+                        <option th:each="smallCategory : ${smallCategoryList}" th:value="${smallCategory.id}" th:text="${smallCategory.nameJp}">
+	                </select>
+	                &nbsp;&nbsp;&nbsp;&nbsp;
+	                タイトル
+	                <input class="padding9 menu-font" type="text" name="title" size="25" value="" placeholder="タイトル">
+	                <br>
+	                &nbsp;&nbsp;&nbsp;&nbsp;レシピ内容
+	                <input class="padding9 menu-font line-height5" type="text" name="content" size="40" value="" placeholder="レシピ内容">
+	                <span class="right">
+	                <button id="search_btn" type="submit" class="btn-gradient orange mini">検索</button>
+	                <a href="/recipe/create" class="btn-gradient blue mini">作成</a>
+	                </span>
+                </form>
             </article>
         </div>
-		<div th:replace="/menu/menu_footer"></div>
+		<div th:replace="menu/menu_footer"></div>
     </body>
 </html>

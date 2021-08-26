@@ -4,8 +4,8 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.recipe.service.mapper.RecipeMapper">
 	<insert id="create" parameterType="com.recipe.model.RecipeDTO">
-		insert into recipe (category_id, small_category_id, title, content, image_url)
-		values (#{categoryId}, #{smallCategoryId}, #{title}, #{content}, #{imageUrl})
+		insert into recipe (category_id, small_category_id, title, content, image_url, update_date, create_date)
+		values (#{categoryId}, #{smallCategoryId}, #{title}, #{content}, #{imageUrl}, now(), now())
 	</insert>
 	
 	<select id="search" parameterType="com.recipe.model.RecipeDTO" resultType="com.recipe.model.RecipeSearchResult">
@@ -26,29 +26,22 @@
 		       content,
 		       image_url as imageUrl
 		  from recipe a
-		 where 1 = 1
-		 <if test="categoryId != null">
+		 where delete_flg = '0'
+		 <if test="categoryId != null and categoryId !=''">
 		   and a.category_id = #{categoryId}
 		 </if>
-		 <if test="smallCategoryId != null">
+		 <if test="smallCategoryId != null and smallCategoryId != ''">
 		   and a.small_category_id = #{smallCategoryId}
 		 </if>
-		 <if test="title != null">
+		 <if test="title != null and title != ''">
 		   and match(a.title) against(#{title})
 		 </if>
-		 <if test="content != null">
+		 <if test="content != null and content !=''">
 		   and match(a.content) against(#{content})
 		 </if>
 	</select>
 	
-	<select id="getCategory" resultType="com.recipe.model.CategoryDto">
-		select id,
-			   name,
-			   name_jp nameJp
-		  from category
-	</select>
-	
-	<select id="getSmallCategory" resultType="com.recipe.model.SmallCategoryDto">
+	<select id="getSmallCategoryList" resultType="com.recipe.model.SmallCategoryDto">
 		select id,
 			   category_id as categoryId,
 			   name,
@@ -72,7 +65,10 @@
 		       ) smallCategoryName,
 		       title,
 		       content,
-		       image_url as imageUrl
+		       image_url as imageUrl,
+		       DATE_FORMAT(update_date, '%Y') updateYear,
+       		   DATE_FORMAT(update_date, '%c') updateMonth,
+       		   DATE_FORMAT(update_date, '%d') updateDay
 		  from recipe a
 		 where 1 = 1
 		   and id = #{id}
@@ -83,6 +79,7 @@
 		   set category_id = #{categoryId},
 		   	   small_category_id = #{smallCategoryId},
 		   	   title = #{title},
+		   	   update_date = now();
 			 <if test="imageUrl != null">
 			   image_url = #{imageUrl},	
 			 </if>
@@ -91,7 +88,8 @@
 	</update>
 	
 	<delete id="deleteRecipe">
-		delete from recipe
+		update recipe
+		   set delete_flg = '1'
 		 where id = #{id} 
 	</delete>
 </mapper>    
