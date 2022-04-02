@@ -28,4 +28,12 @@ public interface CategoryService {
    * @throws Exception
    */
   public void updateCategory(CategoryDto categoryDto) throws Exception;
+
+  /**
+   * カテゴリー作成
+   *
+   * @param categoryDto
+   * @throws Exception
+   */
+  public void createCategory(CategoryDto categoryDto) throws Exception;
 }

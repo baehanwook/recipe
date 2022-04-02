@@ -70,7 +70,7 @@ img {
     background-repeat: no-repeat;
 }
 #home {
-    background-image: url(../img/kzun.jpg);
+    background-image: url(../images/kzun.jpg);
     min-height: 100vh;
 }
 #home .page-title {
@@ -96,7 +96,7 @@ aside {
 }
 /* NEWS */
 #news {
-    background-image: url(../img/kzun.jpg);
+    background-image: url(../images/kzun.jpg);
     height: 100px;
     margin-bottom: 40px;
 }

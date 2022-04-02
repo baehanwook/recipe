@@ -1,6 +1,8 @@
 package com.recipe.controller;
 
+import com.recipe.common.Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,9 +29,9 @@ public class CategoryController {
    * @throws Exception
    */
   @GetMapping(Constants.CATEGORY)
-  public String category(Model model) throws Exception {
+  public String category(Device device, Model model) throws Exception {
     model.addAttribute("categoryList", categoryService.getCategoryList());
-    return "/category/category";
+    return Util.deviceCheck(device, Constants.CATEGORY_LIST);
   }
 
   /**
@@ -40,10 +42,10 @@ public class CategoryController {
    * @throws Exception
    */
   @GetMapping(Constants.CATEGORY + Constants.DETAIL)
-  public String categoryDetail(@RequestParam("id") String id, Model model) throws Exception {
+  public String categoryDetail(Device device, @RequestParam("id") String id, Model model) throws Exception {
     model.addAttribute("category", categoryService.getCategory(id));
     model.addAttribute("categoryList", categoryService.getCategoryList());
-    return "category/categoryDetail";
+    return Util.deviceCheck(device, Constants.CATEGORY_DETAIL);
   }
 
   /**
@@ -55,10 +57,10 @@ public class CategoryController {
    * @throws Exception
    */
   @PostMapping(Constants.CATEGORY + Constants.UPDATE)
-  public String updateCategory(@ModelAttribute CategoryDto categoryDto, Model model) throws Exception {
+  public String updateCategory(Device device, @ModelAttribute CategoryDto categoryDto, Model model) throws Exception {
     model.addAttribute("categoryList", categoryService.getCategoryList());
     categoryService.updateCategory(categoryDto);
-    return "redirect:/recipe/category";
+    return "redirect:" + Constants.CATEGORY_MAIN;
   }
 
   /**
@@ -69,8 +71,21 @@ public class CategoryController {
    * @throws Exception
    */
   @GetMapping(Constants.CATEGORY + Constants.CREATE)
-  public String createCategory(Model model) throws Exception {
+  public String createCategory(Device device, Model model) throws Exception {
     model.addAttribute("categoryList", categoryService.getCategoryList());
-    return "category/categoryCreate";
+    return Util.deviceCheck(device, Constants.CATEGORY_CREATE);
+  }
+
+  /**
+   * カテゴリー作成
+   *
+   * @param model
+   * @return
+   * @throws Exception
+   */
+  @PostMapping(Constants.CATEGORY + Constants.CREATE)
+  public String createCategory(Device device, @ModelAttribute CategoryDto categoryDto, Model model) throws Exception {
+    model.addAttribute("categoryList", categoryService.getCategoryList());
+    return "redirect:" + Constants.CATEGORY_MAIN;
   }
 }

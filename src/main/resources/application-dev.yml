@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:13306/recipe_dev
-    username: docker001
+    username: docker
     password: docker
     
   servlet:

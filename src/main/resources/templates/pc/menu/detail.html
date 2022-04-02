@@ -13,9 +13,9 @@
         <script type="text/javascript" src="/js/detail.js"></script>
     </head>
     <body>
-    	<div th:replace="menu/menu_top"></div>
+    	<div th:replace="pc/menu/menu_top"></div>
         <div class="news-contents wrapper">
-			<div th:replace="menu/menu_left"></div>
+			<div th:replace="pc/menu/menu_left"></div>
             <article>
                 <header class="post-info">
                     <h2 class="post-title"><span th:text="${recipe.title}"></span></h2>
@@ -32,6 +32,6 @@
                 </p>
             </article>
         </div>
-        <div th:replace="menu/menu_footer"></div>
+        <div th:replace="pc/menu/menu_footer"></div>
     </body>
 </html>

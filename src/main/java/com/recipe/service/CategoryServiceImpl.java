@@ -26,4 +26,9 @@ public class CategoryServiceImpl implements CategoryService {
   public void updateCategory(CategoryDto categoryDto) throws Exception {
     categoryMapper.updateCategory(categoryDto);
   }
+
+  @Override
+  public void createCategory(CategoryDto categoryDto) throws Exception {
+    categoryMapper.createCategory(categoryDto);
+  }
 }

@@ -2,7 +2,7 @@
  * レシピ作成
  */
 $(document).ready(function() {
-	$('#create_btn').click(function(){
+	$('#update_btn').click(function(){
 		if (!valCheck($('#categoryId').val())) {
 			alert("カテゴリーを選択してください");
 			return false;
@@ -23,7 +23,7 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		if (!confirm("作成しますか？")) {
+		if (!confirm("修正しますか？")) {
 			return false;
 		}
 	});
@@ -41,6 +41,10 @@ $(document).ready(function() {
 			return false;
 		}
 		return true;
-	}	
+	}
+
+	$('#cancel_btn').click(function(){
+		window.location.replace("/recipe/menu");
+	});
 
 });

@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<!--
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+    <head>
+        <title>Generic - Alpha by HTML5 UP</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+        <link rel="stylesheet" href="/css_mobile/main.css"/>
+        <script src="/js/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="/js/update.js"></script>
+        <script type="text/javascript" src="/js/common.js"></script>
+    </head>
+    <body class="is-preload">
+        <div id="page-wrapper">
+
+            <!-- Header -->
+            <header th:replace="mobile/menu/header"></header>
+
+            <!-- Main -->
+            <section id="main" class="container medium">
+                <header>
+                    <h2>レシピー作成</h2>
+                </header>
+                <div class="box">
+                    <form action="/recipe/update" method="post" enctype="multipart/form-data">
+                        <div class="row gtr-uniform gtr-50">
+                            <div class="col-12">
+                                <select name="categoryId" id="categoryId">
+                                    <option value="">カテゴリー</option>
+                                    <option th:each="category : ${categoryList}" th:value="${category.id}"
+                                            th:text="${category.nameJp}"
+                                            th:selected="${category.id} == ${recipe.categoryId}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <select name="smallCategoryId" id="smallCategoryId">
+                                    <option value="">小カテゴリー</option>
+                                    <option th:each="smallCategory : ${smallCategoryList}"
+                                            th:value="${smallCategory.id}" th:text="${smallCategory.nameJp}"
+                                            th:selected="${smallCategory.id} == ${recipe.smallCategoryId}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-12-mobilep">
+                                <input type="text" name="title" id="title" value="" placeholder="タイトル" th:value="${recipe.title}"/>
+                            </div>
+                            <div class="col-12">
+                                写真：
+                                <input type="file" name="file">
+                            </div>
+                            <div class="col-12">
+                                <textarea name="content" id="content" placeholder="内容を入力してください。" rows="6" th:text="${recipe.content}"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <ul class="actions">
+                                    <li>
+                                        <input id="update_btn" type="submit" value="Update"/>
+                                    </li>
+                                    <li>
+                                        <input id="cancel_btn" type="reset" value="Cancel" class="alt"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <input type="hidden" name=orgFileUrl th:value="${recipe.imageUrl}">
+                        <input type="hidden" name=id th:value="${recipe.id}">
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <!-- Scripts -->
+        <script src="/js/jquery.dropotron.min.js"></script>
+        <script src="/js/jquery.scrollex.min.js"></script>
+        <script src="/js/browser.min.js"></script>
+        <script src="/js/breakpoints.min.js"></script>
+        <script src="/js/util.js"></script>
+        <script src="/js/main.js"></script>
+
+    </body>
+</html>
